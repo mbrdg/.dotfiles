@@ -4,3 +4,5 @@
 require('mbrdg.core.keymaps')
 require('mbrdg.core.options')
 
+require('mbrdg.lazy')
+
