@@ -20,6 +20,9 @@ vim.o.smartcase = true
 -- keep signcolumn by default
 vim.wo.signcolumn = 'yes'
 
+-- add a colorcolumn
+vim.o.colorcolumn = 80
+
 -- decrease the update time
 vim.o.updatetime = 250
 vim.o.timeoutlen = 300

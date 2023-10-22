@@ -45,11 +45,18 @@ return {
     { 'folke/neodev.nvim', opts = {} },
   },
   config = function()
+    -- keymaps for diagnostics
+    local km = vim.keymap
+    km.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+    km.set('n', '[d', vim.diagnostic.get_prev, { desc = 'Go to previous diagnostic message' })
+    km.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+    km.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+
     -- mason-lspconfig requies these function to be called in this order
     -- before setting up the servers
     require('mason').setup()
     require('mason-lspconfig').setup()
-    
+
     local servers = {
       lua_ls = {
         Lua = {

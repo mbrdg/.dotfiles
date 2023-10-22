@@ -7,7 +7,7 @@ return {
     vim.cmd.colorscheme 'onedark'
   end,
   opts = {
-    style = 'warmer'
-  }
+    style = 'deeper',
+  },
 }
 
