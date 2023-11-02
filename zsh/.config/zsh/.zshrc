@@ -5,10 +5,20 @@
 setopt AUTO_CD
 setopt EXTENDED_HISTORY
 
-# pure prompt
-fpath+=($ZDOTDIR/plugins/pure)
-autoload -U promptinit; promptinit
-prompt pure
+# prompt and vcs
+autoload -U colors; colors
+autoload -Uz add-zsh-hook vcs_info
+setopt PROMPT_SUBST
+add-zsh-hook precmd vcs_info
+
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git*' formats '(git:%b%F{magenta}%u%c%f)'
+zstyle ':vcs_info:git*' unstagedstr '*'
+zstyle ':vcs_info:git*' stagedstr '+'
+zstyle ':vcs_info:*:*' check-for-changes true
+
+PROMPT='%(?.%F{green}⏺.%F{red}⏺)%f %n@%m %B%F{cyan}%2~%f%b %# '
+RPROMPT='$vcs_info_msg_0_'
 
 # auto complete
 autoload -U compinit; compinit
