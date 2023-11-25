@@ -6,7 +6,7 @@ return {
   dependencies = {
     'nvim-lua/plenary.nvim',
     -- fuzzy finder algorithm that requires local deps to be built
-    { 
+    {
       'nvim-telescope/telescope-fzf-native.nvim',
       build = 'make',
       cond = function()
@@ -38,7 +38,7 @@ return {
     end, { desc = '[/] Fuzzily search in current buffer' })
 
     km.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
-    km.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })   
+    km.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
     km.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
     km.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
     km.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
