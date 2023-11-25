@@ -40,7 +40,7 @@ return {
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
     -- status updates
-    { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
+    { 'j-hui/fidget.nvim', opts = {} },
     -- documentation
     { 'folke/neodev.nvim', opts = {} },
   },
@@ -64,6 +64,7 @@ return {
           telemetry = { enable = false },
         },
       },
+      pyright = {},
     }
 
     -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
