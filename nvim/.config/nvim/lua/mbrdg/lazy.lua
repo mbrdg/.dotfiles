@@ -1,4 +1,5 @@
 -- lazy.lua
+-- entrypoint for the plugin configuration
 
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
