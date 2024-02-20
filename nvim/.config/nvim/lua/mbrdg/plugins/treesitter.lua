@@ -9,7 +9,7 @@ return {
   build = ':TSUpdate',
   vim.defer_fn(function()
     require('nvim-treesitter.configs').setup {
-      ensure_installed = { 'c', 'cpp', 'rust', 'zig', 'make', 'lua', },
+      ensure_installed = { 'c', 'cpp', 'rust', 'zig', 'python', 'lua', 'make' },
       auto_install = false,
       sync_install = false,
       ignore_install = {},
