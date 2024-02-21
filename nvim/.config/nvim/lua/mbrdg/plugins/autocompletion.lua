@@ -70,7 +70,9 @@ return {
 	end, { 'i', 's' }),
       },
       sources = {
-	{ name = 'nvim-lsp' },
+	{ name = 'nvim_lsp' },
+	{ name = 'luasnip'},
+	{ name = 'path' },
       },
     }
   end
