@@ -10,6 +10,9 @@ vim.wo.number = true
 -- mouse support
 vim.o.mouse = 'a'
 
+-- do not show mode that is already in the status line
+vim.o.showmode = false
+
 -- sync clipboard between OS and nvim
 vim.o.clipboard = 'unnamedplus'
 
@@ -25,12 +28,22 @@ vim.wo.signcolumn = 'yes'
 -- add a colorcolumn
 vim.o.colorcolumn = '80'
 
+-- minimal visible lines
+vim.o.scrolloff = 10
+
 -- decrease the update time
 vim.o.updatetime = 250
 vim.o.timeoutlen = 300
 
 -- better completion
 vim.o.completeopt = 'menuone,noselect'
+
+-- preview substitutions
+vim.o.inccommand = 'split'
+
+-- window splitting
+vim.o.splitright = true
+vim.o.splitbelow = true
 
 -- true colors
 vim.o.termguicolors = true
