@@ -7,7 +7,7 @@ return {
     'nvim-treesitter/nvim-treesitter-textobjects',
   },
   build = ':TSUpdate',
-  vim.defer_fn(function()
+  config = function()
     require('nvim-treesitter.configs').setup {
       ensure_installed = { 'c', 'cpp', 'rust', 'zig', 'python', 'lua', 'make' },
       auto_install = false,
@@ -71,5 +71,5 @@ return {
         },
       },
     }
-  end, 0)
+  end,
 }

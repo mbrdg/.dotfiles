@@ -15,31 +15,39 @@ return {
       -- do not overrride the built-in and fugitive keymaps
       local gs = package.loaded.gitsigns
       local map = function(mode, lhs, rhs, opts)
-	opts = opts or {}
-	opts.buffer = bufnr
-	vim.keymap.set(mode, lhs, rhs, opts)
+        opts = opts or {}
+        opts.buffer = bufnr
+        vim.keymap.set(mode, lhs, rhs, opts)
       end
 
       -- navigation
       map('n', ']c', function()
-	if vim.wo.diff then return ']c' end
-	vim.schedule(function() gs.next_hunk() end)
-	return '<Ignore>'
+        if vim.wo.diff then
+          return ']c'
+        end
+        vim.schedule(function()
+          gs.next_hunk()
+        end)
+        return '<Ignore>'
       end, { expr = true, desc = 'Jump to next hunk' })
-      
+
       map('n', '[c', function()
-	if vim.wo.diff then return '[c' end
-	vim.schedule(function() gs.prev_hunk() end)
-	return '<Ignore>'
+        if vim.wo.diff then
+          return '[c'
+        end
+        vim.schedule(function()
+          gs.prev_hunk()
+        end)
+        return '<Ignore>'
       end, { expr = true, desc = 'Jump to previous hunk' })
 
       -- actions
       -- visual mode
       map('v', '<leader>hs', function()
-	gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
+        gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
       end, { desc = 'Git [s]tage hunk' })
       map('v', '<leader>hr', function()
-	gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
+        gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
       end, { desc = 'Git [r]eset hunk' })
 
       -- normal mode
@@ -48,13 +56,13 @@ return {
       map('n', '<leader>hS', gs.stage_buffer, { desc = 'Git [S]tage buffer' })
       map('n', '<leader>hu', gs.undo_stage_hunk, { desc = 'Git [u]ndo stage hunk' })
       map('n', '<leader>hR', gs.reset_buffer, { desc = 'Git [R]eset buffer' })
-      map('n', '<leader>hp', gs.preview_hunk, { desc = 'Git [p]review hunk'})
+      map('n', '<leader>hp', gs.preview_hunk, { desc = 'Git [p]review hunk' })
       map('n', '<leader>hb', function()
-	gs.blame_line { full = true }
+        gs.blame_line { full = true }
       end, { desc = 'Git [b]lame line' })
       map('n', '<leader>hd', gs.diffthis, { desc = 'Git [d]iff against index' })
       map('n', '<leader>hD', function()
-	gs.diffthis('~')
+        gs.diffthis '~'
       end, { desc = 'Git [D]iff against last commit' })
 
       -- toogles
@@ -63,6 +71,6 @@ return {
 
       -- text objects
       map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { desc = 'Select hunk' })
-    end
+    end,
   },
 }

@@ -1,40 +1,6 @@
 -- plusing/lspconfig.lua
 -- lsp configuration file
 
-local function on_attach(_, bufnr)
-  local function nmap(keys, func, desc)
-    vim.keymap.set('n', keys, func, { buffer = bufnr, desc = 'LSP: ' .. desc })
-  end
-
-  nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-  nmap('<leader>ca', function()
-    vim.lsp.buf.code_action { context = { only = { 'quickfix', 'refactor', 'source' } } }
-  end, '[C]ode [A]ction')
-
-  nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-  nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-  nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-  nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-
-  nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
-
-  nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-  nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-  nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-  nmap('<leader>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, '[W]orkspace [L]ist Folders')
-
-  -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    vim.lsp.buf.format()
-  end, { desc = 'Format current buffer with LSP' })
-end
-
-
 return {
   -- lsp configuration and plugins
   'neovim/nvim-lspconfig',
@@ -42,24 +8,62 @@ return {
     -- automatically install lsps to stdpath for neovim
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
     -- status updates
     { 'j-hui/fidget.nvim', opts = {} },
-    -- documentation
-    { 'folke/neodev.nvim', opts = {} },
   },
   config = function()
     local km = vim.keymap
 
     -- diagnostics
-    km.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-    km.set('n', '[d', vim.diagnostic.get_prev, { desc = 'Go to previous diagnostic message' })
-    km.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-    km.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+    km.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+    km.set('n', '[d', vim.diagnostic.get_prev, { desc = 'Go to previous [D]iagnostic message' })
+    km.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
+    km.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
-    -- mason-lspconfig requies these function to be called before setting up the servers
-    -- these funstions must be called in this order 
-    require('mason').setup()
-    require('mason-lspconfig').setup()
+    vim.api.nvim_create_autocmd('LspAttach', {
+      group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
+      callback = function(event)
+      	local map = function(keys, func, desc)
+	  km.set('n', keys, func, { buffer = event.buf, desc = 'LSP' .. desc })
+      	end
+
+	local builtin = require 'telescope.builtin'
+	map('gd', builtin.lsp_definitions, '[G]oto [D]efinition')
+	map('gr', builtin.lsp_references, '[G]oto [R]eferences')
+	map('gI', builtin.lsp_implementations, '[G]oto [I]mplementation')
+	map('<leader>D', builtin.lsp_type_definitions, '[T]ype [D]efinition')
+	map('<leader>ds', builtin.lsp_document_symbols, '[D]ocument [S]ymbols')
+	map('<leader>ws', builtin.lsp_workspace_symbols, '[W]orkspace [S]ymbols')
+
+	map('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
+	map('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
+	map('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
+	map('<leader>wl', function()
+	  print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+	end, '[W]orkspace [L]ist Folders')
+
+	map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+	map('K', vim.lsp.buf.hover, 'Hover Documentation')
+	map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+
+	local client = vim.lsp.get_client_by_id(event.data.client_id)
+	if client and client.server_capabilities.documentHighlightProvider then
+	  vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+	    buffer = event.buf,
+	    callback = vim.lsp.buf.document_highlight,
+	  })
+
+	  vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+	    buffer = event.buf,
+	    callback = vim.lsp.buf.clear_references,
+	  })
+	end
+      end,
+    })
+
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
     -- enables language servers
     local servers = {
@@ -68,32 +72,34 @@ return {
       zls = {},
       lua_ls = {
         Lua = {
-          workspace = { checkThirdParty = false },
-          telemetry = { enable = false },
+	  runtime = { version = 'LuaJIT', },
+          workspace = { checkThirdParty = false, },
+	  completion = { callSnippet = 'Replace', },
+          telemetry = { enable = false, },
         },
       },
     }
 
-    require('neodev').setup()
+    -- mason-lspconfig requies these function to be called before setting up the servers
+    -- these funstions must be called in this order 
+    require('mason').setup()
 
-    -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+    local ensure_installed = vim.tbl_keys(servers or {})
+    vim.list_extend(ensure_installed, {
+      'stylua', -- used to format the lua code
+    })
 
-    local mason_lspconfig = require 'mason-lspconfig'
+    require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-    mason_lspconfig.setup {
-      ensure_installed = vim.tbl_keys(servers),
-    }
-    mason_lspconfig.setup_handlers {
-      function(server_name)
-	require('lspconfig')[server_name].setup {
-	  capabilities = capabilities,
-	  on_attach = on_attach,
-	  settings = servers[server_name],
-	  filetypes = (servers[server_name] or {}).filetypes,
-	}
-      end,
+    require('mason-lspconfig').setup {
+      handlers = {
+	function(server_name)
+	  local server = servers[server_name] or {}
+	  server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+
+	  require('lspconfig')[server_name].setup(server)
+	end
+      }
     }
   end
 }

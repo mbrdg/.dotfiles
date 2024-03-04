@@ -3,7 +3,7 @@
 
 return {
   'folke/which-key.nvim',
-  event = 'VeryLazy',
+  event = 'VimEnter',
   opts = {},
   config = function()
     require('which-key').register {
