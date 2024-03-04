@@ -18,5 +18,13 @@ km.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 km.set('n', '<leader>nh', ':nohl<CR>', { desc = '[N]o [H]ighlights' })
 
 -- window management
-km.set('n', '<leader>swv', '<C-w>v', { desc = '[S]plit [W]indow [V]ertically' })
-km.set('n', '<leader>swh', '<C-w>h', { desc = '[S]plit [W]indow [H]orizontally' })
+km.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+km.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+km.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+km.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+-- Temporary: disable arrow keys in normal mode
+km.set('n', '<left>', '<cmd>echo "Use h to move.<CR>')
+km.set('n', '<right>', '<cmd>echo "Use l to move."<CR>')
+km.set('n', '<up>', '<cmd>echo "Use k to move."<CR>')
+km.set('n', '<down>', '<cmd>echo "Use j to move."<CR>')
