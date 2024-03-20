@@ -11,6 +11,8 @@ return {
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     -- status updates
     { 'j-hui/fidget.nvim', opts = {} },
+    -- configures nvim lsp
+    { 'folke/neodev.nvim', opts = {} },
   },
   config = function()
     local km = vim.keymap
@@ -73,8 +75,6 @@ return {
       zls = {},
       lua_ls = {
         Lua = {
-          runtime = { version = 'LuaJIT' },
-          workspace = { checkThirdParty = false },
           completion = { callSnippet = 'Replace' },
           telemetry = { enable = false },
         },
