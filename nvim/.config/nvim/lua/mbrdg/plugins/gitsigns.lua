@@ -62,7 +62,7 @@ return {
       end, { desc = 'Git [b]lame line' })
       map('n', '<leader>hd', gs.diffthis, { desc = 'Git [d]iff against index' })
       map('n', '<leader>hD', function()
-        gs.diffthis '~'
+        gs.diffthis '@'
       end, { desc = 'Git [D]iff against last commit' })
 
       -- toogles
