@@ -6,7 +6,7 @@ return {
   'neovim/nvim-lspconfig',
   dependencies = {
     -- automatically install lsps to stdpath for neovim
-    'williamboman/mason.nvim',
+    { 'williamboman/mason.nvim', config = true },
     'williamboman/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     -- status updates
@@ -62,6 +62,20 @@ return {
             callback = vim.lsp.buf.clear_references,
           })
         end
+
+        if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+          map('<leader>th', function()
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enable())
+          end, '[T]oogle Inlay [H]ints')
+        end
+      end,
+    })
+
+    vim.api.nvim_create_autocmd('LspDetach', {
+      group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
+      callback = function(event)
+        vim.lsp.buf.clear_references()
+        vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event.buf }
       end,
     })
 

@@ -2,6 +2,6 @@
 -- easy comment toogler
 
 return {
-  "numToStr/Comment.nvim",
+  'numToStr/Comment.nvim',
   opts = {},
 }

@@ -2,16 +2,20 @@
 -- theme configuration (onedark inspired by atom editor)
 
 return {
-  'navarasu/onedark.nvim',
+  'folke/tokyonight.nvim',
   priority = 1000,
-  lazy = false,
   config = function()
-    require('onedark').setup {
-      style = 'dark',
-      code_style = {
-	functions = 'bold',
+    require('tokyonight').setup {
+      style = 'night',
+      light_style = 'day',
+      terminal_colors = false,
+      styles = {
+        comments = { italic = true },
+        functions = { bold = true },
       },
     }
-    require('onedark').load()
+
+    vim.cmd.colorscheme 'tokyonight'
+    vim.cmd.hi 'Comment gui=none'
   end,
 }
