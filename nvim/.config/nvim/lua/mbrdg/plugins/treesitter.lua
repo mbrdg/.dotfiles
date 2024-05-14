@@ -71,6 +71,7 @@ return {
     require('nvim-treesitter.install').prefer_git = true
     require('nvim-treesitter.configs').setup(opts)
     require('treesitter-context').setup {
+      enable = false,
       max_lines = 3,
     }
   end,
