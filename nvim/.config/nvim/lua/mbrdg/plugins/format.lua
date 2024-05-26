@@ -1,4 +1,4 @@
--- plugins/formatting.lua
+-- plugins/format.lua
 -- conform autoformatter configuration
 
 return {
