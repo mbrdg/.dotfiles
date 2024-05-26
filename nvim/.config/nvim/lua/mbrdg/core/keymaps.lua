@@ -15,7 +15,7 @@ km.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 km.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- clear highlights from a search
-km.set('n', '<leader>nh', ':nohl<CR>', { desc = '[N]o [H]ighlights' })
+km.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- window management
 km.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
