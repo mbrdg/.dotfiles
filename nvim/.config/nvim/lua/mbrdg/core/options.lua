@@ -4,8 +4,9 @@
 -- do not set highlighting on search
 vim.o.hlsearch = false
 
--- make line numbers the default
+-- make line numbers (w/ relative numbers) the default
 vim.wo.number = true
+vim.wo.relativenumber = true
 
 -- mouse support
 vim.o.mouse = 'a'
