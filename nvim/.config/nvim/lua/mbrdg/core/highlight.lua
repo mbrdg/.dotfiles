@@ -1,11 +1,10 @@
 -- highlight.lua
--- highlight on yank 
+-- highlight text on yank
 
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking text',
+  group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
   callback = function()
     vim.highlight.on_yank()
   end,
-  group = highlight_group,
-  pattern = '*',
 })
