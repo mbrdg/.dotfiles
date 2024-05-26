@@ -1,6 +1,9 @@
 -- core/options.lua
 -- neovim options
 
+-- nerd font
+vim.g.have_nerd_font = false
+
 -- do not set highlighting on search
 vim.o.hlsearch = false
 
