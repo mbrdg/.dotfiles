@@ -11,8 +11,8 @@ return {
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     -- status updates
     { 'j-hui/fidget.nvim', opts = {} },
-    -- configures nvim lsp
-    { 'folke/neodev.nvim', opts = {} },
+    -- configures nvim lsp for showing documentation
+    { 'folke/lazydev.nvim', ft = 'lua', opts = {} },
   },
   config = function()
     local km = vim.keymap
