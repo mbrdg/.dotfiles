@@ -81,6 +81,7 @@ return {
     -- enables language servers
     local servers = {
       clangd = {},
+      pyright = {},
       rust_analyzer = {},
       zls = {},
       lua_ls = {
