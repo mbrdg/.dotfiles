@@ -9,4 +9,5 @@ eval "$(fzf --zsh)"
 # Add programming toolchains to the path
 . "$HOME/.cargo/env"
 . "$HOME/.sdkman/bin/sdkman-init.sh"
+eval "$(fnm env --use-on-cd)"
 
