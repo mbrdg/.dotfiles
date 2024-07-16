@@ -9,7 +9,7 @@ return {
     'nvim-treesitter/nvim-treesitter-context',
   },
   opts = {
-    ensure_installed = { 'c', 'cpp', 'rust', 'zig', 'python', 'lua', 'make', 'markdown', 'diff' },
+    ensure_installed = { 'c', 'cpp', 'rust', 'zig', 'python', 'lua', 'make', 'diff' },
     auto_install = false,
     highlight = { enable = true },
     indent = { enable = true },
