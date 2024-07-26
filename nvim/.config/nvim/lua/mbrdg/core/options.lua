@@ -4,9 +4,6 @@
 -- nerd font
 vim.g.have_nerd_font = false
 
--- do not set highlighting on search
-vim.o.hlsearch = false
-
 -- make line numbers (w/ relative numbers) the default
 vim.wo.number = true
 vim.wo.relativenumber = true
@@ -18,7 +15,9 @@ vim.o.mouse = 'a'
 vim.o.showmode = false
 
 -- sync clipboard between OS and nvim
-vim.o.clipboard = 'unnamedplus'
+vim.schedule(function()
+  vim.o.clipboard = 'unnamedplus'
+end)
 
 -- enable break indent
 vim.o.breakindent = true
