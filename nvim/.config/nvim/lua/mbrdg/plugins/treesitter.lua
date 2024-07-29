@@ -14,6 +14,7 @@ return {
       'c',
       'cpp',
       'diff',
+      'go',
       'html',
       'lua',
       'luadoc',
