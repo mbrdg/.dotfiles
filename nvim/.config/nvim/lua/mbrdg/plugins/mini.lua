@@ -1,4 +1,4 @@
--- plugins/mini.ai
+-- plugins/mini.lua
 -- collection of several small independent plugins
 
 return {

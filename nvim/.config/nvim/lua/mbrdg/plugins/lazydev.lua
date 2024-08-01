@@ -1,5 +1,5 @@
--- plugins/lazydev
--- provide configuration for LuaLS and documentation
+-- plugins/lazydev.lua
+-- configuration for LuaLS
 
 return {
   {
