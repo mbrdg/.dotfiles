@@ -4,6 +4,7 @@
 return {
   'nvim-treesitter/nvim-treesitter',
   build = ':TSUpdate',
+  main = 'nvim-treesitter.configs',
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
     'nvim-treesitter/nvim-treesitter-context',
@@ -83,8 +84,7 @@ return {
       },
     },
   },
-  config = function(_, opts)
-    require('nvim-treesitter.configs').setup(opts)
+  config = function(_, _opts)
     require('treesitter-context').setup {
       enable = false,
       max_lines = 3,
