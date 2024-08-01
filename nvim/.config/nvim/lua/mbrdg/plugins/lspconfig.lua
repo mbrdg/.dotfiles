@@ -11,7 +11,6 @@ return {
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     -- status updates
     { 'j-hui/fidget.nvim', opts = {} },
-    'hrsh7th/cmp-nvim-lsp',
   },
   config = function()
     local km = vim.keymap
