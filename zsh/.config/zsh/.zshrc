@@ -21,6 +21,9 @@ PROMPT='%(?.%F{green}⏺.%F{red}⏺)%f %n@%m %B%F{cyan}%2~%f%b %# '
 RPROMPT='$vcs_info_msg_0_'
 
 # auto complete
+fpath+=($(brew --prefix)/share/zsh/site-functions) # add brew shell completions
+eval "$(fzf --zsh)" # add fzf shell integration
+
 autoload -U compinit; compinit
 _comp_options+=(globdots)
 

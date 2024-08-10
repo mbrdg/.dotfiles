@@ -1,10 +1,10 @@
 # Z profile, mbrdg
 
+# Prevent duplicate entries in the PATH
+typeset -U path
+
 # Add brew to the PATH
 eval "$(/opt/homebrew/bin/brew shellenv)"
-
-# Add fzf shell integration
-eval "$(fzf --zsh)"
 
 # Add programming toolchains to the path
 . "$HOME/.cargo/env"
