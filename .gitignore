@@ -6,7 +6,7 @@ zsh/.config/.zcompdump
 zsh/.config/.zcompcache
 zsh/.config/.zsh_sessions
 zsh/.config/plugins/*
-zsh/.config/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+zsh/.config/plugins/fsh/fast-syntax-highlighting.plugin.zsh
 
 # nvim
 nvim/lazy-lock.json

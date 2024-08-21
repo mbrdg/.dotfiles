@@ -28,5 +28,5 @@ autoload -U compinit; compinit
 _comp_options+=(globdots)
 
 # syntax highlighting
-source $ZDOTDIR/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source $ZDOTDIR/plugins/fsh/fast-syntax-highlighting.plugin.zsh
 
