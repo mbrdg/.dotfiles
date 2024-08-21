@@ -1,7 +1,13 @@
 [user]
 	name = Miguel Rodrigues
 	email = migb.rodrigues@gmail.com
+	signingKey = 19DB74E8F3D8BBA1
 [core]
 	editor = nvim
 [init]
 	defaultBranch = main
+[diff]
+	algorithm = histogram
+	colorMoved = default
+[merge]
+	conflictStyle = zdiff3
