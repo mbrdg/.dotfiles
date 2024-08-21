@@ -1,9 +1,12 @@
 # .gitignore
 
 # zsh
-zsh/.config/zsh/.zsh_history
-zsh/.config/zsh/.zcompdump
-zsh/.config/zsh/.zsh_sessions/
+zsh/.config/.zsh_history
+zsh/.config/.zsh_sessions/
+zsh/.config/.zcompdump
+zsh/.config/.zcompcache/
+zsh/.config/plugins/*
+!zsh/.config/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 # nvim
 nvim/lazy-lock.json
