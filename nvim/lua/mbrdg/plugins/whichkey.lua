@@ -5,15 +5,9 @@ return {
   'folke/which-key.nvim',
   event = 'VimEnter',
   config = function()
-    local wk = require 'which-key'
-    wk.setup {
-      icons = {
-        mappings = vim.g.have_nerd_font,
-      },
-    }
-
-    wk.add {
-      { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
+    require('which-key').setup()
+    require('which-key').add {
+      { '<leader>c', group = '[C]ode' },
       { '<leader>d', group = '[D]ocument' },
       { '<leader>r', group = '[R]ename' },
       { '<leader>s', group = '[S]earch' },
