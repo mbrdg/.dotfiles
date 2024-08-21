@@ -17,7 +17,7 @@ zstyle ':vcs_info:git*' unstagedstr '*'
 zstyle ':vcs_info:git*' stagedstr '+'
 zstyle ':vcs_info:*:*' check-for-changes true
 
-PROMPT='%(?.%F{green}⏺.%F{red}⏺)%f %n@%m %B%F{cyan}%2~%f%b %# '
+PROMPT='%(?.%F{green}✓.%F{red}✗)%f %n@%m %B%F{cyan}%2~%f%b %# '
 RPROMPT='$vcs_info_msg_0_'
 
 # auto complete
