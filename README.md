@@ -1,23 +1,30 @@
 # Dotfiles
 
-A personal collection of my configurations for different programs.
+My personal collection of my configuration files for the different programs that
+I use. In this repo, there are configs for the following programs:
+
++ [`zsh`](./zsh/)
++ [`git`](./git/config)
++ [`tmux`](./tmux/tmux.conf)
++ [`nvim`](./nvim/init.lua)
 
 ## Usage
 
-These dotfiles are managed using `stow`.
-So make sure that you have stow installed in your system.
+Files are managed through the script [`mklinks.sh`](./mklinks.sh). It
+automatically populates the links into the `.config` folder.
 
 ```sh
-$ brew install stow
-```
-
-After this, just stow all the packages:
-
-```sh
-$ stow */
+/bin/sh mklinks.sh
 ```
 
 And that's all! :shipit:
+
+## Acknowlegments
+
+These configs are inspired by the following:
+
++ [nvim-kickstart](https://github.com/nvim-lua/kickstart.nvim)
++ [geohot's tmux config](https://github.com/geohot/configuration/blob/master/.tmux.conf)
 
 ---
 [mbrgd](mailto:mig.rodrigues@gmail.com)
