@@ -6,5 +6,4 @@ zsh/.config/zsh/.zcompdump
 zsh/.config/zsh/.zsh_sessions/
 
 # nvim
-nvim/.config/nvim/lazy-lock.json
-
+nvim/lazy-lock.json
