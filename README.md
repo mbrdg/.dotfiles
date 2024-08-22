@@ -14,7 +14,7 @@ Files are managed through the script [`mklinks.sh`](./mklinks.sh). It
 automatically populates the links into the `.config` folder.
 
 ```sh
-/bin/sh mklinks.sh
+sh mklinks.sh
 ```
 
 And that's all! :shipit:
