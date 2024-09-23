@@ -3,7 +3,10 @@
 
 # options
 setopt AUTO_CD
+setopt CORRECT
+setopt NOCLOBBER
 setopt EXTENDED_HISTORY
+setopt HIST_IGNORE_DUPS
 
 # prompt and vcs
 autoload -U colors; colors
