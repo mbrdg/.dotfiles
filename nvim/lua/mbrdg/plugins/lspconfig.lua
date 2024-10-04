@@ -74,13 +74,14 @@ return {
     local servers = {
       clangd = {},
       gopls = {},
-      pyright = {},
+      pylsp = {},
       rust_analyzer = {},
       zls = {},
       lua_ls = {
         Lua = {
           completion = { callSnippet = 'Replace' },
           telemetry = { enable = false },
+          hint = { enable = true },
         },
       },
     }
@@ -93,6 +94,7 @@ return {
     vim.list_extend(ensure_installed, {
       'stylua', -- used to format the lua code
       'clang-format', -- used to format code in c or c++
+      'ruff', -- used to format and lint code in python
     })
 
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
