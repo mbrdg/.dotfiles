@@ -33,3 +33,6 @@ _comp_options+=(globdots)
 # syntax highlighting
 source $ZDOTDIR/plugins/fsh/fast-syntax-highlighting.plugin.zsh
 
+# add llvm to the path, make sure it is in the beggining
+path=('/opt/homebrew/opt/llvm/bin' $path)
+
