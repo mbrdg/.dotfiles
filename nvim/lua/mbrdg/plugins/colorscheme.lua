@@ -1,11 +1,11 @@
 -- plugins/colorscheme.lua
--- theme configuration (tokyonight)
+-- theme configuration (gruber-darker)
 
 return {
-  'rebelot/kanagawa.nvim',
+  'folke/tokyonight.nvim',
   priority = 1000,
   init = function()
-    vim.cmd.colorscheme 'kanagawa-dragon'
+    vim.cmd.colorscheme 'tokyonight-night'
     vim.cmd.hi 'Comment gui=none'
   end,
 }

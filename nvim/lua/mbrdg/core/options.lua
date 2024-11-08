@@ -1,9 +1,6 @@
 -- core/options.lua
 -- neovim options
 
--- nerd font
-vim.g.have_nerd_font = false
-
 -- make line numbers (w/ relative numbers) the default
 vim.wo.number = true
 vim.wo.relativenumber = true
@@ -28,8 +25,6 @@ vim.o.smartcase = true
 
 -- keep signcolumn by default
 vim.wo.signcolumn = 'yes'
--- add a colorcolumn
-vim.o.colorcolumn = '80'
 
 -- minimal visible lines
 vim.o.scrolloff = 10
