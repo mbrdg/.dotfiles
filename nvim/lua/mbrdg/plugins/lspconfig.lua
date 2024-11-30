@@ -78,8 +78,11 @@ return {
       rust_analyzer = {},
       zls = {},
       lua_ls = {
-        Lua = {
-          completion = { callSnippet = 'Replace' },
+        settings = {
+          Lua = {
+            completion = { callSnippet = 'Replace' },
+            hint = { enable = true },
+          },
         },
       },
     }
