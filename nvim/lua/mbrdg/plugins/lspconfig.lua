@@ -5,6 +5,15 @@ return {
   -- lsp configuration and plugins
   'neovim/nvim-lspconfig',
   dependencies = {
+    {
+      'folke/lazydev.nvim',
+      ft = 'lua',
+      opts = {
+        library = {
+          { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+        },
+      },
+    },
     -- automatically install lsps to stdpath for neovim
     { 'williamboman/mason.nvim', config = true },
     'williamboman/mason-lspconfig.nvim',
@@ -22,31 +31,39 @@ return {
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
       callback = function(event)
-        local map = function(mode, keys, func, desc)
+        local map = function(keys, func, desc, mode)
+          mode = mode or 'n'
           km.set(mode, keys, func, { buffer = event.buf, desc = 'LSP' .. desc })
         end
 
         local builtin = require 'telescope.builtin'
-        map('n', 'gd', builtin.lsp_definitions, '[G]oto [D]efinition')
-        map('n', 'gr', builtin.lsp_references, '[G]oto [R]eferences')
-        map('n', 'gI', builtin.lsp_implementations, '[G]oto [I]mplementation')
-        map('n', '<leader>D', builtin.lsp_type_definitions, '[T]ype [D]efinition')
-        map('n', '<leader>ds', builtin.lsp_document_symbols, '[D]ocument [S]ymbols')
-        map('n', '<leader>ws', builtin.lsp_workspace_symbols, '[W]orkspace [S]ymbols')
+        map('gd', builtin.lsp_definitions, '[G]oto [D]efinition')
+        map('gr', builtin.lsp_references, '[G]oto [R]eferences')
+        map('gI', builtin.lsp_implementations, '[G]oto [I]mplementation')
+        map('<leader>D', builtin.lsp_type_definitions, '[T]ype [D]efinition')
+        map('<leader>ds', builtin.lsp_document_symbols, '[D]ocument [S]ymbols')
+        map('<leader>ws', builtin.lsp_workspace_symbols, '[W]orkspace [S]ymbols')
 
-        map('n', '<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-        map({ 'n', 'x' }, '<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-        map('n', 'gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+        map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+        map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
+        map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
-        if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+        if not client then
+          return
+        end
+
+        if client.supports_method 'textDocument/documentHighlight' then
+          local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
           vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
             buffer = event.buf,
+            group = highlight_augroup,
             callback = vim.lsp.buf.document_highlight,
           })
 
           vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
             buffer = event.buf,
+            group = highlight_augroup,
             callback = vim.lsp.buf.clear_references,
           })
 
@@ -59,8 +76,17 @@ return {
           })
         end
 
-        if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
-          map('n', '<leader>th', function()
+        if client.supports_method 'textDocument/formatting' then
+          vim.api.nvim_create_autocmd('BufWritePre', {
+            buffer = event.buf,
+            callback = function()
+              vim.lsp.buf.format { bufnr = event.buf, id = client.id }
+            end,
+          })
+        end
+
+        if client.supports_method 'textDocument/inlayHint' then
+          map('<leader>th', function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
           end, '[T]oogle Inlay [H]ints')
         end
@@ -73,10 +99,24 @@ return {
     -- enables language servers
     local servers = {
       clangd = {},
-      gopls = {},
       pylsp = {},
       rust_analyzer = {},
       zls = {},
+      gopls = {
+        settings = {
+          gopls = {
+            hints = {
+              assignVariableTypes = true,
+              compositeLiteralFields = true,
+              compositeLiteralTypes = true,
+              constantValues = true,
+              functionTypeParameters = true,
+              parameterNames = true,
+              rangeVariableTypes = true,
+            },
+          },
+        },
+      },
       lua_ls = {
         settings = {
           Lua = {
@@ -90,14 +130,14 @@ return {
     -- mason-lspconfig requies these function to be called before setting up the servers
     -- these funstions must be called in this order
     require('mason').setup()
-
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
-      'stylua', -- used to format the lua code
-      'clang-format', -- used to format code in c or c++
-      'ruff', -- used to format and lint code in python
+      'stylua', -- formats lua code
+      'clang-format', -- formats c/c++ code
+      'ruff', -- formats python code
     })
 
+    local ensure_installed = vim.tbl_keys(servers or {})
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
     require('mason-lspconfig').setup {

@@ -8,13 +8,7 @@ return {
   dependencies = {
     'nvim-lua/plenary.nvim',
     -- fuzzy finder algorithm that requires local deps to be built
-    {
-      'nvim-telescope/telescope-fzf-native.nvim',
-      build = 'make',
-      cond = function()
-        return vim.fn.executable 'make' == 1
-      end,
-    },
+    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     'nvim-telescope/telescope-ui-select.nvim',
   },
   config = function()
