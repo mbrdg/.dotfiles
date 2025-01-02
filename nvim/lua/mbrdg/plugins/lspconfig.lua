@@ -5,6 +5,7 @@ return {
   -- lsp configuration and plugins
   'neovim/nvim-lspconfig',
   dependencies = {
+    'saghen/blink.cmp',
     {
       'folke/lazydev.nvim',
       ft = 'lua',
@@ -17,7 +18,6 @@ return {
     -- automatically install lsps to stdpath for neovim
     { 'williamboman/mason.nvim', config = true },
     'williamboman/mason-lspconfig.nvim',
-    'WhoIsSethDaniel/mason-tool-installer.nvim',
     -- status updates
     { 'j-hui/fidget.nvim', opts = {} },
   },
@@ -93,9 +93,6 @@ return {
       end,
     })
 
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
-
     -- enables language servers
     local servers = {
       clangd = {},
@@ -137,16 +134,18 @@ return {
       'ruff', -- formats python code
     })
 
-    local ensure_installed = vim.tbl_keys(servers or {})
-    require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+    local capabilities = require('blink.cmp').get_lsp_capabilities()
+    local lspconfig = require 'lspconfig'
 
     require('mason-lspconfig').setup {
+      ensure_installed = vim.tbl_keys(servers),
+      automatic_installation = false,
       handlers = {
         function(server_name)
-          local server = servers[server_name] or {}
-          server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+          local config = servers[server_name] or {}
+          config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, config.capabilities or {})
 
-          require('lspconfig')[server_name].setup(server)
+          lspconfig[server_name].setup(config)
         end,
       },
     }
