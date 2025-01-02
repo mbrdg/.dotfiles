@@ -5,6 +5,7 @@ I use. In this repo, there are configs for the following programs:
 
 + [`zsh`](./zsh/)
 + [`git`](./git/config)
++ [`ghostty`](./ghostty/config)
 + [`tmux`](./tmux/tmux.conf)
 + [`nvim`](./nvim/init.lua)
 
