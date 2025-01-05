@@ -1,14 +1,20 @@
+# Git config file
+# mbrdg, 2024
+
 [user]
 	name = Miguel Rodrigues
 	email = migb.rodrigues@gmail.com
+
 [core]
 	editor = nvim
-[init]
-	defaultBranch = main
+
 [diff]
 	algorithm = histogram
 	colorMoved = default
+
 [merge]
 	conflictStyle = zdiff3
-[help]
-	autocorrect = prompt
+
+[push]
+	autoSetupRemote = true
+	followtags = true
