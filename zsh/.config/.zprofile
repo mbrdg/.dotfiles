@@ -1,4 +1,5 @@
-# Z profile, mbrdg
+# Z profile, runs for login shells
+# mbrdg, 2025
 
 # Prevent duplicate entries in the PATH
 typeset -U path
@@ -9,8 +10,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # Add programming toolchains to the path
 . "$HOME/.cargo/env"
 . "$HOME/.sdkman/bin/sdkman-init.sh"
-eval "$(fnm env --use-on-cd)"
-
+eval "$(fnm env --use-on-cd --shell zsh)"
 
 # Added by OrbStack: command-line tools and integration
 # This won't be added again if you remove it.
