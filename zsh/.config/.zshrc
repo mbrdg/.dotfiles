@@ -15,13 +15,15 @@ setopt PROMPT_SUBST
 add-zsh-hook precmd vcs_info
 
 zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:git*' formats '(git:%b%F{magenta}%u%c%f)'
-zstyle ':vcs_info:git*' unstagedstr '*'
-zstyle ':vcs_info:git*' stagedstr '+'
+zstyle ':vcs_info:*' nvcsformats '%~' # use the entire path for non-vcs folders
+zstyle ':vcs_info:git:*' formats '%r/%S' '(%s:%b%F{magenta}%u%c%f)'
+zstyle ':vcs_info:git:*' actionformats '%r/%S' '[%a] (%s:%b%F{magenta}%u%c%f)'
+zstyle ':vcs_info:git:*' unstagedstr '*'
+zstyle ':vcs_info:git:*' stagedstr '+'
 zstyle ':vcs_info:*:*' check-for-changes true
 
-PROMPT='%(?.%F{green}✓.%F{red}✗)%f %n@%m %B%F{cyan}%2~%f%b %# '
-RPROMPT='$vcs_info_msg_0_'
+PROMPT='%(?.%F{green}■.%F{red}■)%f %n@%m %B%F{cyan}${vcs_info_msg_0_%/.}%f%b %# '
+RPROMPT='$vcs_info_msg_1_'
 
 # auto complete
 fpath+=($(brew --prefix)/share/zsh/site-functions) # add brew shell completions
