@@ -6,7 +6,7 @@ return {
 	dependencies = 'rafamadriz/friendly-snippets',
 	version = '*',
 	opts = {
-		keymap = { preset = 'super-tab' },
+		keymap = { preset = 'default' },
 		signature = { enabled = true }, -- experimental
 	},
 }
