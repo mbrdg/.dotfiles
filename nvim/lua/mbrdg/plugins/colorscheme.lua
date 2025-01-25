@@ -1,11 +1,11 @@
 -- plugins/colorscheme.lua
--- theme configuration (tokyonight)
+-- theme configuration (one dark)
 
 return {
-	'folke/tokyonight.nvim',
+	'olimorris/onedarkpro.nvim',
 	priority = 1000,
 	init = function()
-		vim.cmd.colorscheme 'tokyonight-night'
+		vim.cmd.colorscheme 'onedark_dark'
 		vim.cmd.hi 'Comment gui=none'
 	end,
 }
