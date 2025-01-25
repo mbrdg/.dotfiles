@@ -3,7 +3,6 @@
 My personal collection of my configuration files for the different programs that
 I use. In this repo, there are configs for the following programs:
 
-+ [`ghostty`](./ghostty/config)
 + [`git`](./git/config)
 + [`nvim`](./nvim/init.lua)
 + [`tmux`](./tmux/tmux.conf)
