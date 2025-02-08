@@ -7,6 +7,7 @@ setopt CORRECT
 setopt NOCLOBBER
 setopt EXTENDED_HISTORY
 setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
 
 # prompt and vcs
 autoload -U colors; colors
