@@ -11,6 +11,7 @@
 [diff]
 	algorithm = histogram
 	colorMoved = default
+	renames = true
 
 [merge]
 	conflictStyle = zdiff3
@@ -18,3 +19,8 @@
 [push]
 	autoSetupRemote = true
 	followtags = true
+
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
