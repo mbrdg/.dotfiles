@@ -55,7 +55,7 @@ return {
           return
         end
 
-        if client.supports_method 'textDocument/documentHighlight' then
+        if client:supports_method('textDocument/documentHighlight', event.buf) then
           local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
           vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
             buffer = event.buf,
@@ -78,7 +78,7 @@ return {
           })
         end
 
-        if client.supports_method 'textDocument/formatting' then
+        if client:supports_method('textDocument/formatting', event.buf) then
           vim.api.nvim_create_autocmd('BufWritePre', {
             buffer = event.buf,
             callback = function()
@@ -87,7 +87,7 @@ return {
           })
         end
 
-        if client.supports_method 'textDocument/inlayHint' then
+        if client:supports_method('textDocument/inlayHint', event.buf) then
           map('<leader>th', function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
           end, '[T]oogle Inlay [H]ints')
