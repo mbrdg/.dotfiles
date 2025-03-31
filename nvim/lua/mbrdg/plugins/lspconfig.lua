@@ -38,17 +38,18 @@ return {
           km.set(mode, keys, func, { buffer = event.buf, desc = 'LSP' .. desc })
         end
 
-        local builtin = require 'telescope.builtin'
-        map('gd', builtin.lsp_definitions, '[G]oto [D]efinition')
-        map('gr', builtin.lsp_references, '[G]oto [R]eferences')
-        map('gI', builtin.lsp_implementations, '[G]oto [I]mplementation')
-        map('<leader>D', builtin.lsp_type_definitions, '[T]ype [D]efinition')
-        map('<leader>ds', builtin.lsp_document_symbols, '[D]ocument [S]ymbols')
-        map('<leader>ws', builtin.lsp_workspace_symbols, '[W]orkspace [S]ymbols')
+        map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
+        map('gra', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
 
-        map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-        map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
-        map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+        map('grr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+        map('gri', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementations')
+        map('grd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinitions')
+
+        map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+
+        map('gO', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[O]pen Document Symbols')
+        map('gW', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Open [W]orkspace Symbols')
+        map('grt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definition')
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         if not client then
