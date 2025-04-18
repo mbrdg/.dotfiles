@@ -2,12 +2,21 @@
 -- autocompletion configuration
 
 return {
-  'saghen/blink.cmp',
-  dependencies = 'rafamadriz/friendly-snippets',
-  version = '*',
-  opts = {
-    keymap = { preset = 'super-tab' },
-    fuzzy = { implementation = 'prefer_rust_with_warning' },
-    signature = { enabled = true }, -- experimental
-  },
+	'saghen/blink.cmp',
+	event = 'VimEnter',
+	version = '1.*',
+	dependencies = {
+		'folke/lazydev.nvim',
+	},
+	opts = {
+		keymap = { preset = 'enter' },
+		sources = {
+			default = { 'lsp', 'path', 'buffer', 'lazydev' },
+			providers = {
+				lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
+			},
+		},
+		fuzzy = { implementation = 'prefer_rust_with_warning' },
+		signature = { enabled = true },
+	},
 }
