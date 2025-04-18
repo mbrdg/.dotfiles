@@ -18,5 +18,10 @@ return {
 		require('mini.surround').setup()
 		require('mini.pairs').setup()
 		require('mini.trailspace').setup()
+
+		local indentscope = require 'mini.indentscope'
+		indentscope.setup {
+			draw = { animation = indentscope.gen_animation.none() },
+		}
 	end,
 }
