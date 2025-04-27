@@ -1,10 +1,9 @@
 -- plugins/colorscheme.lua
--- theme configuration (one dark)
+-- theme configuration (kanagawa)
 
 return {
-	'olimorris/onedarkpro.nvim',
-	priority = 1000,
+	'rebelot/kanagawa.nvim',
 	config = function()
-		vim.cmd.colorscheme 'onedark_dark'
-	end,
+		vim.cmd("colorscheme kanagawa")
+	end
 }

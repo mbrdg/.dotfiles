@@ -13,7 +13,7 @@ vim.o.showmode = false
 
 -- sync clipboard between OS and nvim
 vim.schedule(function()
-  vim.o.clipboard = 'unnamedplus'
+	vim.o.clipboard = 'unnamedplus'
 end)
 
 -- enable break indent
