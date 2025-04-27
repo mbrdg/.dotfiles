@@ -34,7 +34,7 @@ autoload -U compinit; compinit
 _comp_options+=(globdots)
 
 # syntax highlighting
-source $ZDOTDIR/plugins/fsh/fast-syntax-highlighting.plugin.zsh
+source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # use brew's llvm toolchain instead of apple's toolchain
 path=('/opt/homebrew/opt/llvm/bin' $path)
