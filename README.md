@@ -35,4 +35,4 @@ These configs are inspired by the following:
 + [geohot's tmux config](https://github.com/geohot/configuration/blob/master/.tmux.conf)
 
 ---
-[mbrgd](mailto:mig.rodrigues@gmail.com)
+[mbrgd](https://github.com/mbrdg)
