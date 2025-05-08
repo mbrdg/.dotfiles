@@ -6,9 +6,10 @@ return {
 	'neovim/nvim-lspconfig',
 	dependencies = {
 		-- automatically install lsps to stdpath for neovim
-		{ 'williamboman/mason.nvim', opts = {} },
+		{ 'mason-org/mason.nvim', opts = {} },
+		'mason-org/mason-lspconfig.nvim',
 		-- status updates
-		{ 'j-hui/fidget.nvim',       opts = {} },
+		{ 'j-hui/fidget.nvim',    opts = {} },
 		'saghen/blink.cmp',
 	},
 	config = function()
@@ -103,12 +104,18 @@ return {
 			},
 			gopls = {},
 			pylsp = {},
-			rust_analyzer = {}, -- installed via rustup
+			rust_analyzer = {},
 			zls = {},
 		}
 
+		local ensure_installed = vim.tbl_keys(servers)
+		require('mason-lspconfig').setup {
+			ensure_installed = ensure_installed,
+			automatic_enable = false,
+		}
+
 		for server, config in pairs(servers) do
-			vim.lsp.config(server, config or {})
+			vim.lsp.config(server, config)
 			vim.lsp.enable(server)
 		end
 	end,
