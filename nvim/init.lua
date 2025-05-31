@@ -1,8 +1,9 @@
 -- init.lua
 -- nvim config entry file
 
-require 'mbrdg.core.keymaps'
 require 'mbrdg.core.options'
-require 'mbrdg.core.highlight'
+require 'mbrdg.core.keymaps'
 
 require 'mbrdg.lazy'
+
+require 'mbrdg.core.autocmds'
