@@ -36,16 +36,16 @@ return {
 				map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
 				map('gra', vim.lsp.buf.code_action, 'Code [A]ction', { 'n', 'x' })
 
-				map('grr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-				map('gri', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementations')
-				map('grd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinitions')
+				map('grr', require('snacks').picker.lsp_references, '[G]oto [R]eferences')
+				map('gri', require('snacks').picker.lsp_implementations, '[G]oto [I]mplementations')
+				map('grd', require('snacks').picker.lsp_definitions, '[G]oto [D]efinitions')
+				map('grt', require('snacks').picker.lsp_type_definitions, '[G]oto [T]ype Definition')
 
 				-- declaration != definition, e.g., in C this would go to the header
 				map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
-				map('gO', require('telescope.builtin').lsp_document_symbols, '[O]pen Document Symbols')
-				map('gW', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Open [W]orkspace Symbols')
-				map('grt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definition')
+				map('gO', require('snacks').picker.lsp_symbols, '[O]pen Document Symbols')
+				map('gW', require('snacks').picker.lsp_workspace_symbols, 'Open [W]orkspace Symbols')
 
 				local client = vim.lsp.get_client_by_id(event.data.client_id)
 				if not client then
@@ -99,6 +99,7 @@ return {
 					Lua = {
 						completion = { callSnippet = 'Replace' },
 						hint = { enable = true },
+						format = { enable = true }
 					},
 				},
 			},
