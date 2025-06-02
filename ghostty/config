@@ -1,5 +1,0 @@
-# ghostty config file
-# mbrdg, 2025
-
-theme = "light:Apple System Colors Light,dark:Apple System Colors"
-minimum-contrast = 3

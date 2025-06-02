@@ -4,7 +4,6 @@ My personal collection of my configuration files for the different programs that
 I use. In this repo, there are configs for the following programs:
 
 + [`git`](./git/config)
-+ [`ghostty`](./ghostty/config)
 + [`nvim`](./nvim/init.lua)
 + [`tmux`](./tmux/tmux.conf)
 + [`zsh`](./zsh/)
@@ -22,6 +21,7 @@ Files are managed through the script [`mklinks.sh`](./mklinks.sh). It
 automatically populates the links into the `.config` folder.
 
 ```sh
+cd .dotfiles
 sh mklinks.sh
 ```
 
