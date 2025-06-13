@@ -5,7 +5,7 @@ I use. In this repo, there are configs for the following programs:
 
 + [`git`](./git/config)
 + [`nvim`](./nvim/init.lua)
-+ [`tmux`](./tmux/tmux.conf)
++ [`zellij`](./zellij/config.kdl)
 + [`zsh`](./zsh/)
 
 ## Usage
@@ -32,7 +32,6 @@ And that's all! :shipit:
 These configs are inspired by the following:
 
 + [nvim-kickstart](https://github.com/nvim-lua/kickstart.nvim)
-+ [geohot's tmux config](https://github.com/geohot/configuration/blob/master/.tmux.conf)
 
 ---
 [mbrgd](https://github.com/mbrdg)
