@@ -9,20 +9,18 @@ return {
 		{ 'mason-org/mason.nvim', opts = {} },
 		'mason-org/mason-lspconfig.nvim',
 		-- status updates
-		{ 'j-hui/fidget.nvim',    opts = {} },
+		{ 'j-hui/fidget.nvim', opts = {} },
 		'saghen/blink.cmp',
 	},
 	config = function()
-		local km = vim.keymap
-
 		-- diagnostics
 		vim.diagnostic.config({
 			virtual_text = true,
 			severity_sort = true,
 		})
 
-		km.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
-		km.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+		vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
+		vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 		-- lsp attachment
 		vim.api.nvim_create_autocmd('LspAttach', {
@@ -30,7 +28,7 @@ return {
 			callback = function(event)
 				local map = function(keys, func, desc, mode)
 					mode = mode or 'n'
-					km.set(mode, keys, func, { buffer = event.buf, desc = 'LSP' .. desc })
+					vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP' .. desc })
 				end
 
 				map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
@@ -46,6 +44,10 @@ return {
 
 				map('gO', require('snacks').picker.lsp_symbols, '[O]pen Document Symbols')
 				map('gW', require('snacks').picker.lsp_workspace_symbols, 'Open [W]orkspace Symbols')
+
+				map('<leader>td', function()
+					vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+				end, '[T]oogle [D]iagnostics')
 
 				local client = vim.lsp.get_client_by_id(event.data.client_id)
 				if not client then
@@ -86,7 +88,7 @@ return {
 
 				if client:supports_method('textDocument/inlayHint', event.buf) then
 					map('<leader>th', function()
-						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
+						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 					end, '[T]oogle Inlay [H]ints')
 				end
 			end,
