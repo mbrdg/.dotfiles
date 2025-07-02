@@ -10,8 +10,7 @@ return {
 			mappings = false,
 		},
 		spec = {
-			{ '<leader>g', group = '[G]oto',     mode = { 'n', 'x' } },
-			{ '<leader>s', group = '[S]earch' },
+			{ '<leader>s', group = '[S]earch', mode = { 'n', 'v' } },
 			{ '<leader>t', group = '[T]oggle' },
 			{ '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
 		},
