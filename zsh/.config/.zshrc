@@ -27,11 +27,11 @@ PROMPT='%(?.%F{green}■.%F{red}■)%f %n@%m %B%F{cyan}${vcs_info_msg_0_%/.}%f%b
 RPROMPT='$vcs_info_msg_1_'
 
 (( $+commands[fzf] )) && source <(fzf --zsh) # add fzf shell integration
-(( $+commands[zoxide] )) && eval "$(zoxide init zsh)" # add zoxide shell integration
 (( $+commands[brew] )) && path=($(brew --prefix llvm)/bin $path) # add brew's llvm toolchain instead of apple's
 
 autoload -Uz compinit; compinit
 _comp_options+=(globdots)
 
-# syntax highlighting
-. $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# auto suggestions and syntax highlighting
+source $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
