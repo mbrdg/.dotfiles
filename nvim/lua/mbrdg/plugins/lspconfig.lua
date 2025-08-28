@@ -15,7 +15,6 @@ return {
 	config = function()
 		-- diagnostics
 		vim.diagnostic.config({
-			virtual_text = true,
 			severity_sort = true,
 		})
 
@@ -99,9 +98,10 @@ return {
 			lua_ls = {
 				settings = {
 					Lua = {
+						workspace = {
+							library = vim.api.nvim_get_runtime_file("", true),
+						},
 						completion = { callSnippet = 'Replace' },
-						hint = { enable = true },
-						format = { enable = true }
 					},
 				},
 			},

@@ -45,3 +45,4 @@ vim.o.splitbelow = true
 
 -- true colors
 vim.o.termguicolors = true
+vim.o.winborder = "rounded"

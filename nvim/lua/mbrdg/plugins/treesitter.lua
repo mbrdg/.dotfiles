@@ -7,6 +7,6 @@ return {
 	branch = 'main',
 	build = ':TSUpdate',
 	config = function()
-		require('nvim-treesitter').install({ 'c', 'cpp', 'go', 'lua', 'python', 'ocaml', 'rust', 'zig' })
+		require('nvim-treesitter').install({ 'c', 'cpp', 'go', 'lua', 'ocaml', 'python', 'rust', 'zig' })
 	end,
 }
