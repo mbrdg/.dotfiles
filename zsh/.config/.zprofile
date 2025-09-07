@@ -8,7 +8,7 @@ typeset -U path
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Add programming toolchains to the path
-. "$HOME/.cargo/env"
-. "$HOME/.swiftly/env.sh"
-. "$HOME/.sdkman/bin/sdkman-init.sh"
+source "$HOME/.cargo/env"
+source "$HOME/.swiftly/env.sh"
+source "$HOME/.sdkman/bin/sdkman-init.sh"
 eval "$(opam env)"
