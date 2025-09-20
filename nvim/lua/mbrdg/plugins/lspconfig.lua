@@ -122,7 +122,6 @@ return {
 				}
 			},
 			pylsp = {},
-			ocamllsp = {},
 			rust_analyzer = {},
 			zls = {},
 		}

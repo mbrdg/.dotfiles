@@ -9,6 +9,4 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Add programming toolchains to the path
 source "$HOME/.cargo/env"
-source "$HOME/.swiftly/env.sh"
 source "$HOME/.sdkman/bin/sdkman-init.sh"
-eval "$(opam env)"
