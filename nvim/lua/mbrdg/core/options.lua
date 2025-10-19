@@ -1,48 +1,27 @@
 -- core/options.lua
 -- neovim options
 
--- make line numbers (w/ relative numbers) the default
-vim.wo.number = true
-vim.wo.relativenumber = true
+vim.o.mouse = 'a'          -- mouse support
 
--- mouse support
-vim.o.mouse = 'a'
+vim.o.termguicolors = true -- nicer 24-bit colors
+vim.o.winborder = 'none'
 
--- do not show mode that is already in the status line
-vim.o.showmode = false
+vim.o.number = true
+vim.o.relativenumber = true
 
--- sync clipboard between OS and nvim
-vim.schedule(function()
-	vim.o.clipboard = 'unnamedplus'
-end)
+vim.o.showmode = false -- already shown by the status line
+vim.o.ruler = false    -- already shown by the status line
 
--- enable break indent
-vim.o.breakindent = true
-
--- case insensitive seach
+vim.o.autoindent = true
+vim.o.smartindent = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
--- keep signcolumn by default
-vim.wo.signcolumn = 'yes'
+vim.o.signcolumn = 'yes'                            -- add sign column
 
--- minimal visible lines
-vim.o.scrolloff = 10
+vim.o.complete = '.,w,b,kspell'                     -- fewer completion sources
+vim.o.completeopt = 'menuone,noselect,fuzzy,nosort' -- better behavior
 
--- decrease the update time
-vim.o.updatetime = 250
-vim.o.timeoutlen = 500
-
--- better completion
-vim.o.completeopt = 'menuone,noselect'
-
--- preview substitutions
-vim.o.inccommand = 'split'
-
--- window splitting
+vim.o.splitkeep = 'screen'
 vim.o.splitright = true
 vim.o.splitbelow = true
-
--- true colors
-vim.o.termguicolors = true
-vim.o.winborder = "rounded"

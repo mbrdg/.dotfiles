@@ -1,20 +1,10 @@
 -- autocmds.lua
+local gr = vim.api.nvim_create_augroup('mbdrg-config', {})
+autocmd = function(event, pattern, callback, desc)
+  local opts = { group = gr, pattern = pattern, callback = callback, desc = desc }
+  vim.api.nvim_create_autocmd(event, opts)
+end
 
 -- highlight text on yank
-vim.api.nvim_create_autocmd('TextYankPost', {
-	desc = 'Highlight when yanking text',
-	group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
-	callback = function()
-		vim.highlight.on_yank()
-	end,
-})
-
--- start treesitter on filetype basis
-vim.api.nvim_create_autocmd('FileType', {
-	pattern = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'zig', 'python' },
-	callback = function()
-		vim.treesitter.start()
-		vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-	end
-})
+local highlight_on_yank = function() vim.highlight.on_yank() end
+autocmd('TextYankPost', {}, highlight_on_yank, 'Text Yank Highlighting')
