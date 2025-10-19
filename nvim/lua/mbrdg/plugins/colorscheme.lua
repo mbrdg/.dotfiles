@@ -2,8 +2,6 @@
 -- theme configuration (kanagawa)
 
 return {
-	'rebelot/kanagawa.nvim',
-	config = function()
-		vim.cmd("colorscheme kanagawa")
-	end
+  'vague-theme/vague.nvim',
+  config = function() vim.cmd('colorscheme vague') end,
 }
