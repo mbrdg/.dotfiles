@@ -4,7 +4,6 @@
 # options
 setopt AUTO_CD
 setopt CORRECT
-setopt NOCLOBBER
 setopt EXTENDED_HISTORY
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
@@ -26,8 +25,10 @@ zstyle ':vcs_info:*:*' check-for-changes true
 PROMPT='%(?.%F{green}■.%F{red}■)%f %n@%m %B%F{cyan}${vcs_info_msg_0_%/.}%f%b %# '
 RPROMPT='$vcs_info_msg_1_'
 
-(( $+commands[fzf] )) && source <(fzf --zsh) # add fzf shell integration
-(( $+commands[brew] )) && path=($(brew --prefix llvm)/bin $path) # add brew's llvm toolchain instead of apple's
+# add fzf shell integration
+(( $+commands[fzf] )) && source <(fzf --zsh)
+# add brew's llvm toolchain instead of apple's
+(( $+commands[brew] )) && path=($(brew --prefix llvm)/bin $path)
 
 autoload -Uz compinit; compinit
 _comp_options+=(globdots)
