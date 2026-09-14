@@ -1,5 +1,5 @@
 # Z profile, runs for login shells
-# mbrdg, 2025
+# mbrdg, 2026
 
 # Prevent duplicate entries in the PATH
 typeset -U path
@@ -8,5 +8,5 @@ typeset -U path
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Add programming toolchains to the path
-source "$HOME/.cargo/env"
+path+=("$(brew --prefix rustup)/bin")
 source "$HOME/.sdkman/bin/sdkman-init.sh"
